@@ -1,13 +1,3 @@
-const SAMPLE_POLICY = `We care deeply about your privacy and take it seriously.
-
-You may withdraw your consent to data processing at any time by emailing privacy@example.com.
-
-You can request that we delete your personal data by contacting our support team.
-
-Your data may be stored on servers located outside of Sri Lanka for backup purposes.
-
-We use encryption to protect your information from unauthorized access.`;
-
 export default function UploadPanel({ policyText, setPolicyText, onAnalyze, isLoading, error }) {
   return (
     <div className="input-panel">
@@ -29,14 +19,6 @@ export default function UploadPanel({ policyText, setPolicyText, onAnalyze, isLo
           disabled={isLoading || !policyText.trim()}
         >
           {isLoading ? "Analyzing..." : "Run compliance check"}
-        </button>
-
-        <button
-          className="sample-link"
-          type="button"
-          onClick={() => setPolicyText(SAMPLE_POLICY)}
-        >
-          Load sample policy
         </button>
       </div>
 

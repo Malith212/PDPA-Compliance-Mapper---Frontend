@@ -1,7 +1,7 @@
 export default function SectionCard({ section }) {
   const statusLabel = {
     compliant: "Compliant",
-    gap: "Gap",
+    gap: "Not Compliant",
   }[section.status];
 
   return (
@@ -14,7 +14,7 @@ export default function SectionCard({ section }) {
         <h3>{section.title}</h3>
         <p className="section-desc">{section.description}</p>
 
-        {section.best_match && (
+        {section.status === "compliant" && section.best_match && (
           <p className="section-match">"{section.best_match.text}"</p>
         )}
 
