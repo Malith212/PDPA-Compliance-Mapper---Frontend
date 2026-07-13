@@ -28,16 +28,12 @@ export default function App() {
   return (
     <div className="app-shell">
       <header className="masthead">
-        <p className="masthead-eyebrow">Academic Compliance Tool</p>
         <h1 className="masthead-title">PDPA Compliance Mapper</h1>
         <p className="masthead-sub">
-          Checks a privacy policy against the 8 core obligations of Sri Lanka's
-          Personal Data Protection Act, No. 9 of 2022, using a hybrid of
-          semantic similarity and keyword verification.
+          Checks a privacy policy against the 8 core obligations of Sri Lanka's Personal Data Protection Act, No. 9 of 2022, using semantic similarity analysis.
         </p>
         <div className="masthead-meta">
           <span>8 obligations checked</span>
-          <span>Hybrid semantic + keyword engine</span>
         </div>
       </header>
 

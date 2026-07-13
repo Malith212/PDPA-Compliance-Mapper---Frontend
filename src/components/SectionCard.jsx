@@ -23,7 +23,6 @@ export default function SectionCard({ section }) {
 
       <div className="section-stamp-col">
         <span className={`stamp stamp-${section.status}`}>{statusLabel}</span>
-        <span className="score-value">score {section.final_score.toFixed(2)}</span>
       </div>
     </div>
   );
