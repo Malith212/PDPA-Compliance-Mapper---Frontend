@@ -319,3 +319,83 @@ button.primary-btn:focus-visible {
     gap: 14px;
   }
 }
+
+/* ---------- Tab navigation ---------- */
+.tab-nav {
+  display: flex;
+  gap: 4px;
+  margin: 28px 0 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.tab-btn {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  background: none;
+  border: none;
+  padding: 12px 18px;
+  color: var(--muted);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transform: translateY(1px);
+}
+
+.tab-btn:hover {
+  color: var(--ink);
+}
+
+.tab-btn-active {
+  color: var(--ink);
+  border-bottom: 2px solid var(--accent-teal);
+}
+
+/* ---------- Translator mode toggle ---------- */
+.mode-toggle {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.mode-btn {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  background: var(--paper-raised);
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+  padding: 8px 14px;
+  color: var(--ink-soft);
+  cursor: pointer;
+}
+
+.mode-btn-active {
+  border-color: var(--accent-teal);
+  color: var(--accent-teal);
+}
+
+/* ---------- Translation result ---------- */
+.translation-result {
+  margin-top: 24px;
+  padding: 18px;
+  background: var(--paper-raised);
+  border-left: 3px solid var(--accent-teal);
+}
+
+.translation-meta {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--muted);
+  margin: 0 0 10px;
+}
+
+.translation-output {
+  font-family: "Noto Sans Sinhala", "Iskoola Pota", var(--font-body), sans-serif;
+  font-size: 16px;
+  line-height: 1.9;
+  color: var(--ink);
+  white-space: pre-wrap;
+  margin: 0;
+}

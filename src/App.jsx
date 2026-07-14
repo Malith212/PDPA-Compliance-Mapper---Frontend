@@ -1,9 +1,12 @@
 import { useState } from "react";
 import UploadPanel from "./components/UploadPanel.jsx";
 import ReportView from "./components/ReportView.jsx";
+import TranslatorPanel from "./components/TranslatorPanel.jsx";
 import { analyzePolicy } from "./api.js";
 
 export default function App() {
+  const [activeTab, setActiveTab] = useState("compliance"); // "compliance" | "translator"
+
   const [policyText, setPolicyText] = useState("");
   const [report, setReport] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -37,19 +40,40 @@ export default function App() {
         </div>
       </header>
 
-      <UploadPanel
-        policyText={policyText}
-        setPolicyText={setPolicyText}
-        onAnalyze={handleAnalyze}
-        isLoading={isLoading}
-        error={error}
-      />
+      <nav className="tab-nav">
+        <button
+          className={`tab-btn ${activeTab === "compliance" ? "tab-btn-active" : ""}`}
+          onClick={() => setActiveTab("compliance")}
+        >
+          Compliance Mapper
+        </button>
+        <button
+          className={`tab-btn ${activeTab === "translator" ? "tab-btn-active" : ""}`}
+          onClick={() => setActiveTab("translator")}
+        >
+          Sinhala Translator
+        </button>
+      </nav>
 
-      {isLoading && (
-        <p className="loading-note">Extracting clauses and computing embeddings...</p>
+      {activeTab === "compliance" ? (
+        <>
+          <UploadPanel
+            policyText={policyText}
+            setPolicyText={setPolicyText}
+            onAnalyze={handleAnalyze}
+            isLoading={isLoading}
+            error={error}
+          />
+
+          {isLoading && (
+            <p className="loading-note">Extracting clauses and computing embeddings...</p>
+          )}
+
+          {report && <ReportView report={report} />}
+        </>
+      ) : (
+        <TranslatorPanel />
       )}
-
-      {report && <ReportView report={report} />}
     </div>
   );
 }
