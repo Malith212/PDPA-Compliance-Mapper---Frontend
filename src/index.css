@@ -1,14 +1,21 @@
 :root {
-  /* Palette: ink + paper ledger, not the default cream/terracotta pairing */
+  /* Palette: ink on true white, ledger accents for warmth */
   --ink: #1b2333;
   --ink-soft: #3a4356;
-  --paper: #f5f3ee;
+  --paper: #ffffff;
   --paper-raised: #ffffff;
-  --rule: #d9d4c8;
-  --accent-teal: #24534f;
-  --accent-amber: #a97a1f;
-  --accent-brick: #9c3b34;
+  --rule: #e2e1dc;
+  --accent-teal: #1f6b63;
+  --accent-amber: #b8862a;
+  --accent-brick: #b5453b;
   --muted: #6b7280;
+
+  --accent-teal-tint: #e9f3f1;
+  --accent-brick-tint: #faeae7;
+
+  --shadow-sm: 0 1px 2px rgba(27, 35, 51, 0.07);
+  --shadow-md: 0 14px 32px -16px rgba(27, 35, 51, 0.28);
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
 
   --font-display: "Source Serif 4", Georgia, serif;
   --font-body: "Inter", system-ui, sans-serif;
@@ -21,7 +28,11 @@
 
 body {
   margin: 0;
-  background: var(--paper);
+  background-color: var(--paper);
+  background-image:
+    radial-gradient(circle at 12% -10%, rgba(31, 107, 99, 0.055), transparent 45%),
+    radial-gradient(circle at 100% 0%, rgba(184, 134, 42, 0.05), transparent 40%);
+  background-attachment: fixed;
   color: var(--ink);
   font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
@@ -36,45 +47,46 @@ body {
 /* ---------- Masthead ---------- */
 .masthead {
   border-bottom: 3px double var(--ink);
-  padding-bottom: 20px;
+  padding-bottom: 24px;
   margin-bottom: 8px;
 }
 
 .masthead-eyebrow {
   font-family: var(--font-mono);
   font-size: 12px;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--muted);
-  margin: 0 0 6px;
+  color: var(--accent-teal);
+  margin: 0 0 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.masthead-eyebrow::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  background: var(--accent-amber);
+  border-radius: 50%;
 }
 
 .masthead-title {
   font-family: var(--font-display);
-  font-size: clamp(28px, 4vw, 40px);
+  font-size: clamp(30px, 4.4vw, 44px);
   font-weight: 700;
   margin: 0;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.015em;
+  line-height: 1.1;
 }
 
 .masthead-sub {
   font-family: var(--font-body);
-  font-size: 15px;
+  font-size: 15.5px;
   color: var(--ink-soft);
-  margin: 10px 0 0;
-  max-width: 60ch;
-  line-height: 1.5;
-}
-
-.masthead-meta {
-  display: flex;
-  gap: 18px;
-  margin-top: 16px;
-  font-family: var(--font-mono);
-  font-size: 11px;
-  color: var(--muted);
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
+  margin: 14px 0 0;
+  max-width: 62ch;
+  line-height: 1.6;
 }
 
 /* ---------- Input panel ---------- */
@@ -103,6 +115,7 @@ textarea.policy-input {
   background: var(--paper-raised);
   border: 1px solid var(--rule);
   border-radius: 3px;
+  box-shadow: var(--shadow-sm);
   resize: vertical;
 }
 
@@ -127,19 +140,27 @@ button.primary-btn {
   color: var(--paper);
   border: none;
   padding: 12px 22px;
-  border-radius: 2px;
+  border-radius: 3px;
   cursor: pointer;
-  transition: background 0.15s ease;
+  box-shadow: var(--shadow-sm);
+  transition: background 0.15s ease, transform 0.15s var(--ease), box-shadow 0.15s var(--ease);
 }
 
 button.primary-btn:hover:not(:disabled) {
   background: var(--accent-teal);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+button.primary-btn:active:not(:disabled) {
+  transform: translateY(0);
 }
 
 button.primary-btn:disabled {
   background: var(--rule);
   color: var(--muted);
   cursor: not-allowed;
+  box-shadow: none;
 }
 
 button.primary-btn:focus-visible {
@@ -251,6 +272,8 @@ button.primary-btn:focus-visible {
 .section-match {
   background: var(--paper-raised);
   border-left: 3px solid var(--rule);
+  border-radius: 0 3px 3px 0;
+  box-shadow: var(--shadow-sm);
   padding: 10px 14px;
   font-size: 13.5px;
   color: var(--ink-soft);
@@ -329,27 +352,73 @@ button.primary-btn:focus-visible {
 }
 
 .landing-card {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   text-align: left;
   background: var(--paper-raised);
   border: 1px solid var(--rule);
-  border-radius: 3px;
-  padding: 28px 26px;
+  border-top: 3px solid var(--rule);
+  border-radius: 4px;
+  padding: 30px 26px 26px;
   cursor: pointer;
   font-family: inherit;
-  transition: border-color 0.15s ease, transform 0.15s ease;
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  transition: border-color 0.2s var(--ease), transform 0.2s var(--ease),
+    box-shadow 0.2s var(--ease);
 }
 
 .landing-card:hover {
-  border-color: var(--accent-teal);
-  transform: translateY(-2px);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
 }
 
 .landing-card:focus-visible {
   outline: 2px solid var(--accent-teal);
   outline-offset: 2px;
+}
+
+.landing-card-translator {
+  border-top-color: var(--accent-teal);
+}
+
+.landing-card-translator:hover {
+  border-color: var(--accent-teal);
+}
+
+.landing-card-compliance {
+  border-top-color: var(--accent-brick);
+}
+
+.landing-card-compliance:hover {
+  border-color: var(--accent-brick);
+}
+
+.landing-card-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  margin-bottom: 16px;
+}
+
+.landing-card-icon svg {
+  width: 22px;
+  height: 22px;
+}
+
+.landing-card-translator .landing-card-icon {
+  background: var(--accent-teal-tint);
+  color: var(--accent-teal);
+}
+
+.landing-card-compliance .landing-card-icon {
+  background: var(--accent-brick-tint);
+  color: var(--accent-brick);
 }
 
 .landing-card-eyebrow {
@@ -362,7 +431,7 @@ button.primary-btn:focus-visible {
 
 .landing-card-title {
   font-family: var(--font-display);
-  font-size: 22px;
+  font-size: 23px;
   font-weight: 700;
   color: var(--ink);
   margin-top: 8px;
@@ -371,17 +440,34 @@ button.primary-btn:focus-visible {
 .landing-card-desc {
   font-size: 13.5px;
   color: var(--ink-soft);
-  line-height: 1.5;
-  margin: 10px 0 18px;
+  line-height: 1.55;
+  margin: 10px 0 20px;
 }
 
 .landing-card-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   font-family: var(--font-mono);
   font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 0.06em;
   color: var(--accent-teal);
   margin-top: auto;
+}
+
+.landing-card-compliance .landing-card-cta {
+  color: var(--accent-brick);
+}
+
+.landing-card-cta svg {
+  width: 14px;
+  height: 14px;
+  transition: transform 0.2s var(--ease);
+}
+
+.landing-card:hover .landing-card-cta svg {
+  transform: translateX(3px);
 }
 
 @media (max-width: 640px) {
@@ -393,8 +479,13 @@ button.primary-btn:focus-visible {
 /* ---------- Page header (compliance / translator) ---------- */
 .page-header {
   border-bottom: 1px solid var(--rule);
-  padding-bottom: 18px;
+  border-left: 3px solid var(--accent-teal);
+  padding: 4px 0 18px 16px;
   margin: 24px 0 8px;
+}
+
+.page-header-compliance {
+  border-left-color: var(--accent-brick);
 }
 
 .page-header-title {
@@ -445,6 +536,7 @@ button.primary-btn:focus-visible {
   cursor: pointer;
   border-bottom: 2px solid transparent;
   transform: translateY(1px);
+  transition: color 0.15s ease, border-color 0.15s ease;
 }
 
 .tab-btn:hover {
@@ -453,6 +545,7 @@ button.primary-btn:focus-visible {
 
 .tab-btn-active {
   color: var(--ink);
+  font-weight: 600;
   border-bottom: 2px solid var(--accent-teal);
 }
 
@@ -470,23 +563,32 @@ button.primary-btn:focus-visible {
   letter-spacing: 0.04em;
   background: var(--paper-raised);
   border: 1px solid var(--rule);
-  border-radius: 2px;
+  border-radius: 3px;
   padding: 8px 14px;
   color: var(--ink-soft);
   cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  transition: border-color 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.mode-btn:hover {
+  color: var(--ink);
 }
 
 .mode-btn-active {
   border-color: var(--accent-teal);
   color: var(--accent-teal);
+  box-shadow: var(--shadow-sm);
 }
 
 /* ---------- Translation result ---------- */
 .translation-result {
   margin-top: 24px;
-  padding: 18px;
+  padding: 18px 20px;
   background: var(--paper-raised);
   border-left: 3px solid var(--accent-teal);
+  border-radius: 0 4px 4px 0;
+  box-shadow: var(--shadow-sm);
 }
 
 .translation-meta {
