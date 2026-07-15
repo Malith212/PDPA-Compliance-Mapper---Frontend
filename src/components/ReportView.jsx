@@ -16,7 +16,7 @@ export default function ReportView({ report }) {
           </div>
           <div className="summary-chip chip-gap">
             <b>{report.gap_count}</b>
-            Gaps
+            Not Compliant
           </div>
         </div>
       </div>
