@@ -14,6 +14,12 @@ export default function ReportView({ report }) {
             <b>{report.compliant_count}</b>
             Compliant
           </div>
+          {report.violation_count > 0 && (
+            <div className="summary-chip chip-violation">
+              <b>{report.violation_count}</b>
+              Violation
+            </div>
+          )}
           <div className="summary-chip chip-gap">
             <b>{report.gap_count}</b>
             Not Compliant
